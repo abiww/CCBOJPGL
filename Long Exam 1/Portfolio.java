@@ -3,41 +3,49 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Portfolio implements ActionListener{
+public class MyPortfolio implements ActionListener{
 	JFrame frame;
 	JLayeredPane layeredPane;
+	
+	//panels
 	JPanel sidePanel;
 	JPanel menuPanel;
 	JPanel aboutPanel;
 	JPanel skillsPanel;
 	JPanel educationPanel;
-	JPanel experiencePanel;
+	JPanel projectPanel;
 	JPanel interestPanel;
 	JPanel contactPanel;
+	
+	//image
 	ImageIcon logo;
 	JLabel logoLabel;
+	
+	//buttons
 	JButton about;
 	JButton skills;
-	JButton experience;
+	JButton project;
 	JButton education;
 	JButton interest;
 	JButton contact;
+	
+	//labels
 	JLabel aboutHeadings;
 	JLabel skillsHeadings;
 	JLabel educationHeadings;
-	JLabel experienceHeadings;
+	JLabel projectHeadings;
 	JLabel interestHeadings;
 	JLabel contactHeadings;
 	
-	 Portfolio() {
+	 MyPortfolio() {
 		 //setting frame
 		 frame = new JFrame("Portfolio");
 		 
-     //setting layered panel
+		 //setting layered panel
 		 layeredPane = new JLayeredPane();
 		 layeredPane.setBounds(230,0,770,600);
 		 
-     //setting panels
+		 //setting panels
 		 sidePanel = new JPanel();
 		 sidePanel.setBackground(Color.ORANGE);
 		 sidePanel.setBounds(0,0,30,600);
@@ -62,10 +70,10 @@ public class Portfolio implements ActionListener{
 		 educationPanel.setBounds(0,0,770,600);
 		 educationPanel.setLayout(null);
 		 
-		 experiencePanel = new JPanel();
-		 experiencePanel.setBackground(new Color(0xCC99FF));
-		 experiencePanel.setBounds(0,0,770,600);
-		 experiencePanel.setLayout(null);
+		 projectPanel = new JPanel();
+		 projectPanel.setBackground(new Color(0xCC99FF));
+		 projectPanel.setBounds(0,0,770,600);
+		 projectPanel.setLayout(null);
 		 
 		 interestPanel = new JPanel();
 		 interestPanel.setBackground(new Color(0x87CEEB));
@@ -78,7 +86,7 @@ public class Portfolio implements ActionListener{
 		 contactPanel.setLayout(null);
 		 
 		 //add logo image
-		 logo = new ImageIcon("C:\\Users\\63999\\Downloads\\ABee-removebg-preview.png");
+		 logo = new ImageIcon("C:\\Users\\National University\\Desktop\\ALLADO_INF224\\ABee.png");
 		 Image image = logo.getImage() ;
 		 Image resizedImage = image.getScaledInstance(200, 200, java.awt.Image.SCALE_SMOOTH);
 		 logo = new ImageIcon(resizedImage);
@@ -113,13 +121,13 @@ public class Portfolio implements ActionListener{
 		 education.setFocusable(false);
 		 education.addActionListener(this);
 		 
-		 experience = new JButton("EXPERIENCE");
-		 experience.setFont(new Font("Tahoma", Font.BOLD, 20));
-		 experience.setBackground(new Color(255, 255, 255));
-		 experience.setForeground(Color.BLACK);
-		 experience.setBorderPainted(false);
-		 experience.setFocusable(false);
-		 experience.addActionListener(this);
+		 project = new JButton("PROJECT");
+		 project.setFont(new Font("Tahoma", Font.BOLD, 20));
+		 project.setBackground(new Color(255, 255, 255));
+		 project.setForeground(Color.BLACK);
+		 project.setBorderPainted(false);
+		 project.setFocusable(false);
+		 project.addActionListener(this);
 		 
 		 interest = new JButton("INTEREST");
 		 interest.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -141,63 +149,63 @@ public class Portfolio implements ActionListener{
 		 menuPanel.add(about);
 		 menuPanel.add(skills);
 		 menuPanel.add(education);
-		 menuPanel.add(experience);
+		 menuPanel.add(project);
 		 menuPanel.add(interest);
 		 menuPanel.add(contact);
 		 
 		 //adding details in about panel
-		 aboutHeadings = new JLabel("ABOUT ME");
-		 aboutHeadings.setFont(new Font("Tahoma", Font.BOLD, 40));
-		 aboutHeadings.setForeground(Color.BLACK);
-		 aboutHeadings.setBounds(100, 100, 770, 50);
+//		 aboutHeadings = new JLabel("ABOUT ME");
+//		 aboutHeadings.setFont(new Font("Tahoma", Font.BOLD, 40));
+//		 aboutHeadings.setForeground(Color.BLACK);
+//		 aboutHeadings.setBounds(100, 100, 770, 50);
 		 
-		 aboutPanel.add(aboutHeadings);
+//		 aboutPanel.add(aboutHeadings);
 		 
 		 //adding details in skills panel
-		 skillsHeadings = new JLabel("RELEVANT SKILLS");
-		 skillsHeadings.setFont(new Font("Tahoma", Font.BOLD, 40));
-		 skillsHeadings.setForeground(Color.BLACK);
-		 skillsHeadings.setBounds(100, 100, 770, 50);
+//		 skillsHeadings = new JLabel("RELEVANT SKILLS");
+//		 skillsHeadings.setFont(new Font("Tahoma", Font.BOLD, 40));
+//		 skillsHeadings.setForeground(Color.BLACK);
+//		 skillsHeadings.setBounds(100, 100, 770, 50);
 		 
-		 skillsPanel.add(skillsHeadings);
+//		 skillsPanel.add(skillsHeadings);
 		 
 		 //adding details in education panel
-		 educationHeadings = new JLabel("EDUCATION BACKGROUND");
-		 educationHeadings.setFont(new Font("Tahoma", Font.BOLD, 40));
-		 educationHeadings.setForeground(Color.BLACK);
-		 educationHeadings.setBounds(100, 100, 770, 50);
+//		 educationHeadings = new JLabel("EDUCATION BACKGROUND");
+//		 educationHeadings.setFont(new Font("Tahoma", Font.BOLD, 40));
+//		 educationHeadings.setForeground(Color.BLACK);
+//		 educationHeadings.setBounds(100, 100, 770, 50);
 		 
-		 educationPanel.add(educationHeadings);
+//		 educationPanel.add(educationHeadings);
 		 
 		 //adding details in experience panel
-		 experienceHeadings = new JLabel("EXPERIENCE");
-		 experienceHeadings.setFont(new Font("Tahoma", Font.BOLD, 40));
-		 experienceHeadings.setForeground(Color.BLACK);
-		 experienceHeadings.setBounds(100, 100, 770, 50);
+//		 projectHeadings = new JLabel("PROJECTS");
+//		 projectHeadings.setFont(new Font("Tahoma", Font.BOLD, 40));
+//		 projectHeadings.setForeground(Color.BLACK);
+//		 projectHeadings.setBounds(100, 100, 770, 50);
 		 
-		 experiencePanel.add(experienceHeadings);
+//		 projectPanel.add(projectHeadings);
 		 
 		 //adding details in interest panel
-		 interestHeadings = new JLabel("INTEREST");
-		 interestHeadings.setFont(new Font("Tahoma", Font.BOLD, 40));
-		 interestHeadings.setForeground(Color.BLACK);
-		 interestHeadings.setBounds(100, 100, 770, 50);
+//		 interestHeadings = new JLabel("INTEREST");
+//		 interestHeadings.setFont(new Font("Tahoma", Font.BOLD, 40));
+//		 interestHeadings.setForeground(Color.BLACK);
+//		 interestHeadings.setBounds(100, 100, 770, 50);
 		 
-		 interestPanel.add(interestHeadings);
+//		 interestPanel.add(interestHeadings);
 		 
 		 //adding details in contact panel
-		 contactHeadings = new JLabel("CONTACT DETAILS");
-		 contactHeadings.setFont(new Font("Tahoma", Font.BOLD, 40));
-		 contactHeadings.setForeground(Color.BLACK);
-		 contactHeadings.setBounds(100, 100, 770, 50);
+//		 contactHeadings = new JLabel("CONTACT DETAILS");
+//		 contactHeadings.setFont(new Font("Tahoma", Font.BOLD, 40));
+//		 contactHeadings.setForeground(Color.BLACK);
+//		 contactHeadings.setBounds(100, 100, 770, 50);
 		 
-		 contactPanel.add(contactHeadings);
+//		 contactPanel.add(contactHeadings);
 		 
 		 //adding panels in layered panels
 		 layeredPane.add(aboutPanel, Integer.valueOf(5));
 		 layeredPane.add(skillsPanel, Integer.valueOf(4));
 		 layeredPane.add(educationPanel, Integer.valueOf(3));
-		 layeredPane.add(experiencePanel, Integer.valueOf(2));
+		 layeredPane.add(projectPanel, Integer.valueOf(2));
 		 layeredPane.add(interestPanel, Integer.valueOf(1));
 		 layeredPane.add(contactPanel, Integer.valueOf(0));
 		 frame.add(layeredPane);
@@ -220,7 +228,7 @@ public class Portfolio implements ActionListener{
 			aboutPanel.setVisible(true);
 			skillsPanel.setVisible(false);
 			educationPanel.setVisible(false);
-			experiencePanel.setVisible(false);
+			projectPanel.setVisible(false);
 			interestPanel.setVisible(false);
 			contactPanel.setVisible(false);
 		}
@@ -230,7 +238,7 @@ public class Portfolio implements ActionListener{
 			aboutPanel.setVisible(false);
 			skillsPanel.setVisible(true);
 			educationPanel.setVisible(false);
-			experiencePanel.setVisible(false);
+			projectPanel.setVisible(false);
 			interestPanel.setVisible(false);
 			contactPanel.setVisible(false);
 		}
@@ -240,17 +248,17 @@ public class Portfolio implements ActionListener{
 			aboutPanel.setVisible(false);
 			skillsPanel.setVisible(false);
 			educationPanel.setVisible(true);
-			experiencePanel.setVisible(false);
+			projectPanel.setVisible(false);
 			interestPanel.setVisible(false);
 			contactPanel.setVisible(false);
 		}
 
-		if(e.getSource().equals(experience)) {
+		if(e.getSource().equals(project)) {
 			sidePanel.setBackground(new Color(0xCC99FF));
 			aboutPanel.setVisible(false);
 			skillsPanel.setVisible(false);
 			educationPanel.setVisible(false);
-			experiencePanel.setVisible(true);
+			projectPanel.setVisible(true);
 			interestPanel.setVisible(false);
 			contactPanel.setVisible(false);
 		}
@@ -260,7 +268,7 @@ public class Portfolio implements ActionListener{
 			aboutPanel.setVisible(false);
 			skillsPanel.setVisible(false);
 			educationPanel.setVisible(false);
-			experiencePanel.setVisible(false);
+			projectPanel.setVisible(false);
 			interestPanel.setVisible(true);
 			contactPanel.setVisible(false);
 		}
@@ -270,13 +278,13 @@ public class Portfolio implements ActionListener{
 			aboutPanel.setVisible(false);
 			skillsPanel.setVisible(false);
 			educationPanel.setVisible(false);
-			experiencePanel.setVisible(false);
+			projectPanel.setVisible(false);
 			interestPanel.setVisible(false);
 			contactPanel.setVisible(true);
 		}
 	}
 	
 	public static void main(String args[]) {
-		Portfolio myPortfolio = new Portfolio();
+		MyPortfolio myPortfolio = new MyPortfolio();
 	}
 }
