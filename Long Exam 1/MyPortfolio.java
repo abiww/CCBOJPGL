@@ -3,7 +3,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
@@ -24,65 +23,24 @@ public class MyPortfolio extends Panel implements ActionListener{
 		
 		//adding buttons
 		about = new JButton("ABOUT");
-		about.setHorizontalAlignment(SwingConstants.LEFT);
-		about.setFont(new Font("Tahoma", Font.BOLD, 20));
-		about.setBackground(Color.WHITE);
-		about.setForeground(Color.BLACK);
-		about.setBorderPainted(false);
-		about.setPreferredSize(new Dimension(200, 55));
-		about.setFocusable(false);
 		about.addActionListener(this);
 		
 		skill = new JButton("SKILLS");
-		skill.setHorizontalAlignment(SwingConstants.LEFT);
-		skill.setFont(new Font("Tahoma", Font.BOLD, 20));
-		skill.setBackground(Color.WHITE);
-		skill.setForeground(Color.BLACK);
-		skill.setBorderPainted(false);
-		skill.setFocusable(false);
-		skill.setPreferredSize(new Dimension(200, 55));
 		skill.addActionListener(this);
 		
 		education = new JButton("EDUCATION");
-		education.setHorizontalAlignment(SwingConstants.LEFT);
-		education.setFont(new Font("Tahoma", Font.BOLD, 20));
-		education.setBackground(Color.WHITE);
-		education.setForeground(Color.BLACK);
-		education.setBorderPainted(false);
-		education.setFocusable(false);
-		education.setPreferredSize(new Dimension(200, 55));
 		education.addActionListener(this);
 		
 		project = new JButton("PROJECT");
-		project.setHorizontalAlignment(SwingConstants.LEFT);
-		project.setFont(new Font("Tahoma", Font.BOLD, 20));
-		project.setBackground(Color.WHITE);
-		project.setForeground(Color.BLACK);
-		project.setBorderPainted(false);
-		project.setFocusable(false);
-		project.setPreferredSize(new Dimension(200, 55));
 		project.addActionListener(this);
 		
 		interest = new JButton("INTEREST");
-		interest.setHorizontalAlignment(SwingConstants.LEFT);
-		interest.setFont(new Font("Tahoma", Font.BOLD, 20));
-		interest.setBackground(Color.WHITE);
-		interest.setForeground(Color.BLACK);
-		interest.setBorderPainted(false);
-		interest.setFocusable(false);
-		interest.setPreferredSize(new Dimension(200, 55));
 		interest.addActionListener(this);
 		
 		contact = new JButton("CONTACT");
-		contact.setHorizontalAlignment(SwingConstants.LEFT);
-		contact.setFont(new Font("Tahoma", Font.BOLD, 20));
-		contact.setBackground(Color.WHITE);
-		contact.setForeground(Color.BLACK);
-		contact.setBorderPainted(false);
-		contact.setFocusable(false);
-		contact.setPreferredSize(new Dimension(200, 55));
 		contact.addActionListener(this);
 		
+		//adding panels
 		sidePanel = new Panel();
 		sidePanel.updateBounds(0, 0, 30, 600);
 		
