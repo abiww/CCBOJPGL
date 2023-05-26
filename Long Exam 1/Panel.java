@@ -1,7 +1,8 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.Image;
-
 import javax.swing.*;
 
 public class Panel{
@@ -50,6 +51,15 @@ public class Panel{
 	}
 	
 	public void addButtons(JButton button) {
+		button.setHorizontalAlignment(SwingConstants.LEFT);
+		button.setFont(new Font("Tahoma", Font.BOLD, 20));
+		button.setBackground(Color.WHITE);
+		button.setForeground(Color.BLACK);
+		button.setBorderPainted(false);
+		button.setPreferredSize(new Dimension(200, 55));
+		button.setFocusable(false);
+		
+		
 		panel.add(button);
 	}
 	
