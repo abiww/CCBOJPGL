@@ -6,11 +6,12 @@ public class MainFrame implements ActionListener {
 	JFrame frame;
 	JPanel topPanel, topLeftPanel, topRightPanel, centerPanel;
 	JLayeredPane layeredPane;
-	JPanel homePanel, aboutPanel, reservationPanel, registerPanel, orderSlipPanel;
-	JButton home, about, reservation, register, orderSlip;
+	JPanel homePanel, aboutPanel, registrationPanel, registerPanel, registerPicturePanel;
+	JButton home, about, registration, register, orderSlip;
 	ImageIcon logo;
 	Image image, resizedImage;
-	JLabel logoLabel, titleLabel;
+	JLabel logoLabel, fullname, studentID, department, program;
+	JTextField fullnameTF, studentIDTF, departmentTF, programTF;
 	
 	MainFrame (String title) {
 		frame = new JFrame(title);
@@ -30,16 +31,6 @@ public class MainFrame implements ActionListener {
 		topRightPanel.setPreferredSize(new Dimension(1000, 80));
 		topRightPanel.setLayout(new FlowLayout(FlowLayout.TRAILING, 5, 0));
 		
-		about = new JButton("ABOUT");
-		about.setHorizontalAlignment(SwingConstants.CENTER);
-		about.setFont(new Font("Tahoma", Font.BOLD, 18));
-		about.setBackground(new Color(0x293478));
-		about.setForeground(Color.WHITE);
-		about.setPreferredSize(new Dimension(100,80));
-		about.setBorderPainted(false);
-		about.setFocusable(false);
-		about.addActionListener(this);
-		
 		home = new JButton("HOME");
 		home.setHorizontalAlignment(SwingConstants.CENTER);
 		home.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -50,37 +41,27 @@ public class MainFrame implements ActionListener {
 		home.setFocusable(false);
 		home.addActionListener(this);
 		
-		reservation = new JButton("RESERVATION");
-		reservation.setHorizontalAlignment(SwingConstants.CENTER);
-		reservation.setFont(new Font("Tahoma", Font.BOLD, 18));
-		reservation.setBackground(new Color(0x293478));
-		reservation.setForeground(Color.WHITE);
-		reservation.setPreferredSize(new Dimension(170,80));
-		reservation.setBorderPainted(false);
-		reservation.setFocusable(false);
-		reservation.addActionListener(this);
+		about = new JButton("ABOUT");
+		about.setHorizontalAlignment(SwingConstants.CENTER);
+		about.setFont(new Font("Tahoma", Font.BOLD, 18));
+		about.setBackground(new Color(0x293478));
+		about.setForeground(Color.WHITE);
+		about.setPreferredSize(new Dimension(100,80));
+		about.setBorderPainted(false);
+		about.setFocusable(false);
+		about.addActionListener(this);
 		
-		orderSlip = new JButton("ORDER SLIP");
-		orderSlip.setHorizontalAlignment(SwingConstants.CENTER);
-		orderSlip.setFont(new Font("Tahoma", Font.BOLD, 18));
-		orderSlip.setBackground(new Color(0x293478));
-		orderSlip.setForeground(Color.WHITE);
-		orderSlip.setPreferredSize(new Dimension(150,80));
-		orderSlip.setBorderPainted(false);
-		orderSlip.setFocusable(false);
-		orderSlip.addActionListener(this);
+		registration = new JButton("REGISTRATION");
+		registration.setHorizontalAlignment(SwingConstants.CENTER);
+		registration.setFont(new java.awt.Font("Tahoma", Font.BOLD, 18));
+		registration.setBackground(new Color(0x293478));
+		registration.setForeground(Color.WHITE);
+		registration.setPreferredSize(new Dimension(180, 80));
+		registration.setBorderPainted(false);
+		registration.setFocusable(false);
+		registration.addActionListener(this);
 		
-		register = new JButton("REGISTRATION");
-		register.setHorizontalAlignment(SwingConstants.CENTER);
-		register.setFont(new java.awt.Font("Tahoma", Font.BOLD, 18));
-		register.setBackground(new Color(0x293478));
-		register.setForeground(Color.WHITE);
-		register.setPreferredSize(new Dimension(180, 80));
-		register.setBorderPainted(false);
-		register.setFocusable(false);
-		register.addActionListener(this);
-		
-		logo = new ImageIcon("C:\\Users\\63999\\Downloads\\download-removebg-preview.png");
+		logo = new ImageIcon("C:\\Users\\National University\\Desktop\\ALLADO_INF224\\NU BE Pics\\BulldogLogo.png");
 		image = logo.getImage() ;
 		resizedImage = image.getScaledInstance(100, 70, java.awt.Image.SCALE_SMOOTH);
 		logo = new ImageIcon(resizedImage);
@@ -96,17 +77,13 @@ public class MainFrame implements ActionListener {
 		
 		topRightPanel.add(home);
 		topRightPanel.add(about); 
-		topRightPanel.add(register);
-		topRightPanel.add(orderSlip);
-		topRightPanel.add(reservation);
+		topRightPanel.add(registration);
 		
 		topPanel.add(topLeftPanel, BorderLayout.WEST);
 		topPanel.add(topRightPanel, BorderLayout.EAST);
 		
 		layeredPane = new JLayeredPane();
 		layeredPane.setBounds(0, 80, 1185,650);
-		
-		
 		
 		aboutPanel = new JPanel();
 		aboutPanel.setBackground(Color.MAGENTA);
@@ -116,23 +93,72 @@ public class MainFrame implements ActionListener {
 		homePanel.setBackground(Color.BLUE);
 		homePanel.setBounds(0, 0, 1185, 630);
 		
+		registrationPanel = new JPanel();
+		registrationPanel.setBackground(Color.ORANGE);
+		registrationPanel.setBounds(0, 0, 1185, 630);
+		registrationPanel.setLayout(null);
+		
+		//add details in registration panel
 		registerPanel = new JPanel();
-		registerPanel.setBackground(Color.ORANGE);
-		registerPanel.setBounds(0, 0, 1185, 630);
+		registerPanel.setBounds(400, 65, 400, 450);
+		registerPanel.setLayout(null);
 		
-		reservationPanel = new JPanel();
-		reservationPanel.setBackground(Color.GREEN);
-		reservationPanel.setBounds(0, 0, 1185, 630);
+		fullname = new JLabel("NAME:");
+		fullname.setFont(new Font("Tahoma", Font.BOLD, 15));
+		fullname.setForeground(Color.BLACK);
+		fullname.setBounds(35, 50, 50, 25);
 		
-		orderSlipPanel = new JPanel();
-		orderSlipPanel.setBackground(Color.PINK);
-		orderSlipPanel.setBounds(0, 0, 1185, 630);
+		studentID = new JLabel("STUDENT ID:");
+		studentID.setFont(new Font("Tahoma", Font.BOLD, 15));
+		studentID.setForeground(Color.BLACK);
+		studentID.setBounds(35, 90, 100, 25);
 		
-		layeredPane.add(homePanel, Integer.valueOf(4));
-		layeredPane.add(aboutPanel, Integer.valueOf(3));
-		layeredPane.add(registerPanel, Integer.valueOf(2));
-		layeredPane.add(orderSlipPanel, Integer.valueOf(1));
-		layeredPane.add(reservationPanel, Integer.valueOf(0));
+		department = new JLabel("DEPARTMENT:");
+		department.setFont(new Font("Tahoma", Font.BOLD, 15));
+		department.setForeground(Color.BLACK);
+		department.setBounds(35, 130, 110, 25);
+		
+		program = new JLabel("PROGRAM:");
+		program.setFont(new Font("Tahoma", Font.BOLD, 15));
+		program.setForeground(Color.BLACK);
+		program.setBounds(35, 170, 100, 25);
+		
+		fullnameTF = new JTextField();
+		fullnameTF.setBounds(165, 50, 200, 25);
+		
+		studentIDTF = new JTextField();
+		studentIDTF.setBounds(165, 90, 200, 25);
+		
+		departmentTF = new JTextField();
+		departmentTF.setBounds(165, 130, 200, 25);
+		
+		programTF = new JTextField();
+		programTF.setBounds(165, 170, 200, 25);
+		
+		register = new JButton("REGISTER");
+		register.setHorizontalAlignment(SwingConstants.CENTER);
+		register.setFont(new Font("Tahoma", Font.BOLD, 15));
+		register.setBackground(new Color(0x00FF00));
+		register.setForeground(Color.WHITE);
+		register.setBounds(165, 210, 115, 25);
+		register.setFocusable(false);
+		register.addActionListener(this);
+
+		registerPanel.add(fullname);
+		registerPanel.add(studentID);
+		registerPanel.add(department);
+		registerPanel.add(program);
+		registerPanel.add(fullnameTF);
+		registerPanel.add(studentIDTF);
+		registerPanel.add(departmentTF);
+		registerPanel.add(programTF);
+		registerPanel.add(register);
+		
+		registrationPanel.add(registerPanel, BorderLayout.CENTER);
+		
+		layeredPane.add(homePanel, Integer.valueOf(2));
+		layeredPane.add(aboutPanel, Integer.valueOf(1));
+		layeredPane.add(registrationPanel, Integer.valueOf(0));
 		
 		frame.add(topPanel);
 		frame.add(layeredPane);
@@ -150,67 +176,34 @@ public class MainFrame implements ActionListener {
 		if (e.getSource().equals(about)) {
 			about.setForeground(Color.orange);
 			home.setForeground(Color.white);
-			register.setForeground(Color.white);
-			orderSlip.setForeground(Color.white);
-			reservation.setForeground(Color.white);
+			registration.setForeground(Color.white);
 			
 			aboutPanel.setVisible(true);
 			homePanel.setVisible(false);
-			registerPanel.setVisible(false);
-			orderSlipPanel.setVisible(false);
-			reservationPanel.setVisible(false);
+			registrationPanel.setVisible(false);
 			
 		} else if (e.getSource().equals(home)) {
 			about.setForeground(Color.white);
 			home.setForeground(Color.orange);
-			register.setForeground(Color.white);
-			orderSlip.setForeground(Color.white);
-			reservation.setForeground(Color.white);
+			registration.setForeground(Color.white);
 			
 			aboutPanel.setVisible(false);
 			homePanel.setVisible(true);
-			registerPanel.setVisible(false);
-			orderSlipPanel.setVisible(false);
-			reservationPanel.setVisible(false);
+			registrationPanel.setVisible(false);
 			
-		} else if (e.getSource().equals(register)) {
+		} else if (e.getSource().equals(registration)) {
 			about.setForeground(Color.white);
 			home.setForeground(Color.white);
-			register.setForeground(Color.orange);
-			orderSlip.setForeground(Color.white);
-			reservation.setForeground(Color.white);
+			registration.setForeground(Color.orange);
 			
 			aboutPanel.setVisible(false);
 			homePanel.setVisible(false);
-			registerPanel.setVisible(true);
-			orderSlipPanel.setVisible(false);
-			reservationPanel.setVisible(false);
-			
-		} else if (e.getSource().equals(orderSlip)) {
-			about.setForeground(Color.white);
-			home.setForeground(Color.white);
-			register.setForeground(Color.white);
-			orderSlip.setForeground(Color.orange);
-			reservation.setForeground(Color.white);
-			
-			aboutPanel.setVisible(false);
-			homePanel.setVisible(false);
-			registerPanel.setVisible(false);
-			orderSlipPanel.setVisible(true);
-			reservationPanel.setVisible(false);
-			
-		} else if (e.getSource().equals(reservation)) {
-			about.setForeground(Color.white);
-			home.setForeground(Color.white);
-			register.setForeground(Color.white);
-			orderSlip.setForeground(Color.white);
-			reservation.setForeground(Color.orange);	
-			
-			aboutPanel.setVisible(false);
-			homePanel.setVisible(false);
-			registerPanel.setVisible(false);
-			orderSlipPanel.setVisible(false);
-			reservationPanel.setVisible(true);
+			registrationPanel.setVisible(true);
+		}
+		
+		if (e.getSource().equals(register)) {
+			frame.dispose();
+			new FeaturesFrame ("NU Bulldog Exchange Queueing Management System");
 		}
 	}
 	
