@@ -2,24 +2,35 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-class MainPage implements ActionListener {
-	private JFrame frame;
-	private JPanel topPanel, topLeftPanel, topRightPanel;
-	private JLayeredPane layeredPane, reservationLP;
-	private JPanel homePanel, aboutPanel, registrationPanel, registerPanel, reservationPanel, slotReservationPanel, slotReservationSummaryPanel, orderSlipPanel, orderSummaryPanel, inventoryPanel;
-	private JButton home, about, registration, register, orderSlip, reservation, next, previous, submit;
-	private ImageIcon logo, calendar[];
-	private Image image, resizedImage;
-	private JLabel logoLabel, fullname, studentID, email, contactNumber, department, program, calendarLabel, slotReservationLabel, slotReservationMessageLabel, purposeLabel, selectDateLabel, monthLabel, dayLabel, yearLabel, selectTimeLabel, amLabel, pmLabel;
-	private JLabel slotReservationSummaryLabel, slotReservationSummaryNoteLabel, purposeSummaryLabel;
-	private JTextField purposeSummaryTF;
-	private JTextField fullnameTF, studentIDTF, departmentTF, programTF, contactTF, yearTF;
-	private JComboBox monthsCB, purposeCB, daysCB;
-	private JRadioButton time_1, time_2, time_3, time_4, time_5;
-	private ButtonGroup timeOptions;
+class MainPage extends ContentPanel implements ActionListener {
+	 JFrame frame;
+	 ContentPanel homePanel,aboutPanel, registrationPanel, reservationPanel, orderSlipPanel;
+	 JLayeredPane layeredPane, reservationLP;
+	 JPanel topPanel, topLeftPanel, topRightPanel;
+	 JPanel registerPanel;
+	 JPanel slotReservationPanel, slotReservationSummaryPanel;
+	 JPanel orderSummaryPanel, inventoryPanel;
+	 JButton home, about, registration, orderSlip, reservation;
+	 JButton register, next, previous, submit;
+	 ImageIcon logo, calendar[];
+	 Image image, resizedImage;
+	 JLabel logoLabel;
+	 JLabel fullnameLabel, studentIDLabel, emailLabel, contactNumberLabel, departmentLabel;
+	 JLabel calendarLabel, slotReservationLabel, slotReservationMessageLabel, purposeLabel, selectDateLabel, monthLabel, dayLabel, yearLabel, selectTimeLabel, amLabel, pmLabel;
+	 JLabel slotReservationSummaryLabel, slotReservationSummaryNoteLabel, purposeSummaryLabel;
+	 JTextField purposeSummaryTF;
+	 JTextField fullnameTF, studentIDTF, departmentTF, programTF, contactTF, yearTF;
+	 JComboBox monthsCB, purposeCB, daysCB;
+	 JRadioButton time_1, time_2, time_3, time_4, time_5;
+	 ButtonGroup timeOptions;
 	int i;
 	
-	MainPage () {
+//	MainPage (String fullname, String studentID, String email, String department, int contactNumber) {
+//		super(fullname, studentID, email, department, contactNumber);
+	
+	MainPage (int color) {
+		super(color);
+		
 		frame = new JFrame("NU Bulldog Exchange Queueing Management System");
 		
 		topPanel = new JPanel();
@@ -111,18 +122,14 @@ class MainPage implements ActionListener {
 		layeredPane = new JLayeredPane();
 		layeredPane.setBounds(0, 80, 1185,650);
 		
-		aboutPanel = new JPanel();
-		aboutPanel.setBackground(Color.MAGENTA);
-		aboutPanel.setBounds(0, 0, 1185,630);
+		homePanel = new ContentPanel(0xFFBD59);
+		homePanel.addImage("C:\\Users\\National University\\Desktop\\ALLADO_INF224\\NU BE Pics\\HOME.png", 900, 600);
 		
-		homePanel = new JPanel();
-		homePanel.setBackground(Color.BLUE);
-		homePanel.setBounds(0, 0, 1185, 630);
-		
-		registrationPanel = new JPanel();
-		registrationPanel.setBackground(Color.ORANGE);
-		registrationPanel.setBounds(0, 0, 1185, 630);
-		registrationPanel.setLayout(null);
+		aboutPanel = new ContentPanel(0xFFBD59);
+		aboutPanel.addImage("C:\\Users\\National University\\Desktop\\ALLADO_INF224\\NU BE Pics\\ABOUT.png", 900, 600);
+
+
+		registrationPanel = new ContentPanel(0xFFBD59);
 			
 			//add components in registration panel
 			registerPanel = new JPanel();
@@ -130,32 +137,30 @@ class MainPage implements ActionListener {
 			registerPanel.setBounds(400, 65, 400, 350);
 			registerPanel.setLayout(null);
 				
-			fullname = new JLabel("FULL NAME:");
-			fullname.setFont(new Font("Tahoma", Font.BOLD, 15));
-			fullname.setForeground(Color.WHITE);
-			fullname.setBounds(35, 50, 150, 25);
+			fullnameLabel = new JLabel("FULL NAME:");
+			fullnameLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+			fullnameLabel.setForeground(Color.WHITE);
+			fullnameLabel.setBounds(35, 50, 150, 25);
 				
-			studentID = new JLabel("STUDENT ID:");
-			studentID.setFont(new Font("Tahoma", Font.BOLD, 15));
-			studentID.setForeground(Color.WHITE);
-			studentID.setBounds(35, 90, 100, 25);
+			studentIDLabel = new JLabel("STUDENT ID:");
+			studentIDLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+			studentIDLabel.setForeground(Color.WHITE);
+			studentIDLabel.setBounds(35, 90, 100, 25);
 			
-			email = new JLabel("EMAIL:");
-			email.setFont(new Font("Tahoma", Font.BOLD, 15));
-			email.setForeground(Color.WHITE);
-			email.setBounds(35, 130, 110, 25);
+			emailLabel = new JLabel("EMAIL:");
+			emailLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+			emailLabel.setForeground(Color.WHITE);
+			emailLabel.setBounds(35, 130, 110, 25);
 			
-			department = new JLabel("DEPARTMENT:");
-			department.setFont(new Font("Tahoma", Font.BOLD, 15));
-			department.setForeground(Color.WHITE);
-			department.setBounds(35, 170, 150, 25);
+			departmentLabel = new JLabel("DEPARTMENT:");
+			departmentLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+			departmentLabel.setForeground(Color.WHITE);
+			departmentLabel.setBounds(35, 170, 150, 25);
 			
-			contactNumber = new JLabel("CONTACT NO.:");
-			contactNumber.setFont(new Font("Tahoma", Font.BOLD, 15));
-			contactNumber.setForeground(Color.WHITE);
-			contactNumber.setBounds(35, 210, 150, 25);
-
-			program = new JLabel("PROGRAM:");
+			contactNumberLabel = new JLabel("CONTACT NO.:");
+			contactNumberLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+			contactNumberLabel.setForeground(Color.WHITE);
+			contactNumberLabel.setBounds(35, 210, 150, 25);
 			
 			fullnameTF = new JTextField();
 			fullnameTF.setBounds(165, 50, 200, 25);
@@ -180,11 +185,11 @@ class MainPage implements ActionListener {
 			register.setFocusable(false);
 			register.addActionListener(this);
 
-			registerPanel.add(fullname);
-			registerPanel.add(studentID);
-			registerPanel.add(contactNumber);
-			registerPanel.add(department);
-			registerPanel.add(email);
+			registerPanel.add(fullnameLabel);
+			registerPanel.add(studentIDLabel);
+			registerPanel.add(contactNumberLabel);
+			registerPanel.add(departmentLabel);
+			registerPanel.add(emailLabel);
 			registerPanel.add(fullnameTF);
 			registerPanel.add(contactTF);
 			registerPanel.add(studentIDTF);
@@ -192,12 +197,10 @@ class MainPage implements ActionListener {
 			registerPanel.add(programTF);
 			registerPanel.add(register);
 				
-			registrationPanel.add(registerPanel);
+			registrationPanel.addPanel(registerPanel);
 			
-		orderSlipPanel = new JPanel();
-		orderSlipPanel.setBackground(Color.PINK);
-		orderSlipPanel.setBounds(0, 0, 1185, 630);
-		orderSlipPanel.setLayout(new BorderLayout());
+		orderSlipPanel = new ContentPanel(0x000099);
+//		orderSlipPanel.setLayout(new BorderLayout());
 		
 			//add components in order slip
 			orderSummaryPanel = new JPanel();
@@ -212,14 +215,10 @@ class MainPage implements ActionListener {
 			
 				//add components in inventory panel
 			
-			orderSlipPanel.add(orderSummaryPanel, BorderLayout.EAST);
-			orderSlipPanel.add(inventoryPanel, BorderLayout.WEST);
+			orderSlipPanel.addPanel(orderSummaryPanel);
+			orderSlipPanel.addPanel(inventoryPanel);
 		
-		reservationPanel = new JPanel();
-		reservationPanel.setBackground(new Color(0x004C99));
-		reservationPanel.setBounds(0, 0, 1185, 630);
-		reservationPanel.setLayout(null);
-		
+		reservationPanel = new ContentPanel(0x000099);
 			//add components in reservation
 			reservationLP = new JLayeredPane();
 			reservationLP.setBounds(835, 0, 360, 585);
@@ -303,16 +302,16 @@ class MainPage implements ActionListener {
 					yearTF.setEditable(false);   
 					yearTF.setBounds(240, 270, 80, 25);
 					
-					selectTimeLabel = new JLabel("SELECT THE TIME:");
+					selectTimeLabel = new JLabel("AVAILABLE SLOTS:");
 					selectTimeLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 					selectTimeLabel.setForeground(Color.BLACK);
-					selectTimeLabel.setBounds(30, 320, 200, 20);
+					selectTimeLabel.setBounds(30, 320, 250, 20);
 					
 					amLabel = new JLabel("AM SCHEDULE");
 					amLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 					amLabel.setHorizontalAlignment(SwingConstants.LEFT);
 					amLabel.setForeground(Color.BLACK);
-					amLabel.setBounds(30, 350, 150, 20);
+					amLabel.setBounds(30, 350, 120, 20);
 					
 					pmLabel = new JLabel("PM SCHEDULE");
 					pmLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -481,16 +480,16 @@ class MainPage implements ActionListener {
 			next.setFocusable(false);
 			next.addActionListener(this);
 			
-			reservationPanel.add(calendarLabel);
-			reservationPanel.add(next);
-			reservationPanel.add(previous);
-			reservationPanel.add(reservationLP);
+			reservationPanel.addLabel(calendarLabel);
+			reservationPanel.addButton(next);
+			reservationPanel.addButton(previous);
+			reservationPanel.addLP(reservationLP);
 		
-		layeredPane.add(homePanel, Integer.valueOf(4));
-		layeredPane.add(aboutPanel, Integer.valueOf(3));
-		layeredPane.add(registrationPanel, Integer.valueOf(2));
-		layeredPane.add(orderSlipPanel, Integer.valueOf(1));
-		layeredPane.add(reservationPanel, Integer.valueOf(0));
+		layeredPane.add(homePanel.getPanel(), Integer.valueOf(4));
+		layeredPane.add(aboutPanel.getPanel(), Integer.valueOf(3));
+		layeredPane.add(registrationPanel.getPanel(), Integer.valueOf(2));
+		layeredPane.add(orderSlipPanel.getPanel(), Integer.valueOf(1));
+		layeredPane.add(reservationPanel.getPanel(), Integer.valueOf(0));
 		
 		frame.add(topPanel);
 		frame.add(layeredPane);
@@ -546,6 +545,8 @@ class MainPage implements ActionListener {
 		}
 		
 		if (e.getSource().equals(register)) {
+			JOptionPane.showMessageDialog(null, "Registered Successful!");
+
 			about.setVisible(false);
 			home.setVisible(false);
 			registration.setVisible(false);
@@ -609,7 +610,6 @@ class MainPage implements ActionListener {
 	        }
 		
 		if (e.getSource().equals(submit)) {
-//			 JOptionPane.showMessageDialog(null, );
 			int result = JOptionPane.showConfirmDialog(frame,"Do you want to reserve?", "Slot Reservation Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 			
 			if (result == JOptionPane.YES_OPTION){
@@ -621,6 +621,6 @@ class MainPage implements ActionListener {
 	}
 	
 	public static void main (String[] args) {
-		MainPage mainPage = new MainPage ();	
+		MainPage mainPage = new MainPage(0x000099);	
 	}
 }
