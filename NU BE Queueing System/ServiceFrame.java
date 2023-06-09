@@ -1,3 +1,4 @@
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
@@ -19,7 +21,11 @@ public class ServiceFrame extends JFrame implements ActionListener{
 	private ImageIcon logo;
 	private Image image, resizedImage;
 	private JLabel logoLabel;
-	private JButton service, orderSlip, reservation;
+	private JButton orderSlip, reservation;
+        private JLayeredPane layeredPane;
+        
+        private OrderSlipPanel orderslipPanel;
+        private ReservationPanel reservationPanel;
 	
 
 	ServiceFrame(String title) {
@@ -52,16 +58,16 @@ public class ServiceFrame extends JFrame implements ActionListener{
 		topRightPanel.setBackground(new Color(0x293478));
 		topRightPanel.setPreferredSize(new Dimension(1000, 80));
 		topRightPanel.setLayout(new FlowLayout(FlowLayout.TRAILING, 10, 0));
-		
-		service = new JButton("SERVICE");
-		service.setHorizontalAlignment(SwingConstants.CENTER);
-		service.setFont(new Font("Tahoma", Font.BOLD, 18));
-		service.setBackground(new Color(0x293478));
-		service.setForeground(Color.WHITE);
-		service.setPreferredSize(new Dimension(120,80));
-		service.setBorderPainted(false);
-		service.setFocusable(false);
-		service.addActionListener(this);
+	
+//		service = new JButton("SERVICE");
+//		service.setHorizontalAlignment(SwingConstants.CENTER);
+//		service.setFont(new Font("Tahoma", Font.BOLD, 18));
+//		service.setBackground(new Color(0x293478));
+//		service.setForeground(Color.WHITE);
+//		service.setPreferredSize(new Dimension(120,80));
+//		service.setBorderPainted(false);
+//		service.setFocusable(false);
+//		service.addActionListener(this);
 		
 		orderSlip = new JButton("ORDER SLIP");
 		orderSlip.setHorizontalAlignment(SwingConstants.CENTER);
@@ -83,14 +89,25 @@ public class ServiceFrame extends JFrame implements ActionListener{
 		reservation.setFocusable(false);
 		reservation.addActionListener(this);
 		
-		topRightPanel.add(service);
+//		topRightPanel.add(service);
 		topRightPanel.add(orderSlip);
 		topRightPanel.add(reservation);
 		
 		topPanel.add(topLeftPanel, BorderLayout.WEST);
 		topPanel.add(topRightPanel, BorderLayout.EAST);
+                
+                layeredPane = new JLayeredPane();
+		layeredPane.setBounds(0, 80, 1185, 585);
+                
+                orderslipPanel = new OrderSlipPanel(0x29FF78);
+                
+                reservationPanel = new ReservationPanel(0xFFFF78);
+                
+                layeredPane.add(orderslipPanel.getPanel(), Integer.valueOf(1));
+		layeredPane.add(reservationPanel.getPanel(), Integer.valueOf(0));
 		
 		add(topPanel);
+                add(layeredPane);
 		
 		setSize(new Dimension(1200, 700));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -102,20 +119,21 @@ public class ServiceFrame extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		if (e.getSource().equals(service)) {
-			service.setForeground(Color.orange);
-			orderSlip.setForeground(Color.white);
-			reservation.setForeground(Color.white);
-			
-		} else if (e.getSource().equals(orderSlip)) {
-			service.setForeground(Color.white);
+		if (e.getSource().equals(orderSlip)) {
+//			service.setForeground(Color.white);
 			orderSlip.setForeground(Color.orange);
 			reservation.setForeground(Color.white);
+                        
+                        orderslipPanel.setVisible(true);
+                        reservationPanel.setVisible(false);
 		
 		} else if (e.getSource().equals(reservation)) {
-			service.setForeground(Color.white);
+//			service.setForeground(Color.white);
 			orderSlip.setForeground(Color.white);
-			reservation.setForeground(Color.orange);	
+			reservation.setForeground(Color.orange);
+                        
+                        orderslipPanel.setVisible(false);
+                        reservationPanel.setVisible(true);
 		
 		}
 		
