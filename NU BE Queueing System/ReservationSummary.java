@@ -8,7 +8,7 @@ import java.awt.image.*;
 public class ReservationSummaryFrame extends JFrame{
     private JLabel purposeLabel, dateLabel, timeLabel;
     private JLabel purpose, date, time;
-    private JLabel headings, noteLabel;
+    private JLabel headings, noteLabel_1, noteLabel_2;
     private JLabel logoLabel;
     private JPanel topPanel, summaryPanel;
     private ImageIcon logo;
@@ -47,11 +47,16 @@ public class ReservationSummaryFrame extends JFrame{
 		headings.setForeground(new Color(0x293476));
 		headings.setBounds(10, 15, 280, 20);
 		
-		String note = ("This reservation is valid for the date and time selected only (1-time use ONLY). It is suggested to reschedule if you can't come.");
-		noteLabel = new JLabel("<html><div style='text-align: summaryPanel;'>" + note + "</div></html>");
-		noteLabel.setFont(new Font("Tahoma", Font.BOLD, 10));
-		noteLabel.setBounds(15, 40, 265, 35);
-				
+		String note_1 = ("This reservation is valid for the date and time selected only (1-time use ONLY). It is suggested to reschedule if you can't come.");
+		noteLabel_1 = new JLabel("<html><div style='text-align: center;'>" + note_1 + "</div></html>");
+		noteLabel_1.setFont(new Font("Tahoma", Font.BOLD, 10));
+		noteLabel_1.setBounds(15, 40, 265, 35);
+			
+		String note_2 =("Secure a copy by taking a screenshot or saving this. Present this at the BE to avoid waiting in line.");
+		noteLabel_2 = new JLabel("<html><div style='text-align: center;'>" + note_2 + "</div></html>");
+		noteLabel_2.setFont(new Font("Tahoma", Font.BOLD, 10));
+		noteLabel_2.setBounds(20, 380, 265, 35);
+		
 		purposeLabel = new JLabel("PURPOSE:");
 		purposeLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
 		purposeLabel.setForeground(Color.BLACK);
@@ -104,7 +109,8 @@ public class ReservationSummaryFrame extends JFrame{
         });
         
 		summaryPanel.add(headings);
-		summaryPanel.add(noteLabel);
+		summaryPanel.add(noteLabel_1);
+		summaryPanel.add(noteLabel_2);
         summaryPanel.add(purposeLabel);
         summaryPanel.add(dateLabel);
         summaryPanel.add(timeLabel);
