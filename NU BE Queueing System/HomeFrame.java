@@ -1,20 +1,6 @@
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 public class HomeFrame extends JFrame implements ActionListener {
 	private JPanel topPanel, topLeftPanel, topRightPanel;
@@ -22,7 +8,6 @@ public class HomeFrame extends JFrame implements ActionListener {
 	private Image image, resizedImage;
 	private JLabel logoLabel;
 	private JButton home, about, registration;
-	private JButton register;
 	private JLayeredPane layeredPane;
 	
 	private HomePanel homePanel;
@@ -101,7 +86,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 		
 		aboutPanel = new AboutPanel(0x99BD59);
 		
-		registrationPanel = new RegistrationPanel(0xFFBD59);
+		registrationPanel = new RegistrationPanel(0xFFBD59, this);
 		
 		topPanel.add(topLeftPanel, BorderLayout.WEST);
 		topPanel.add(topRightPanel, BorderLayout.EAST);
@@ -151,19 +136,10 @@ public class HomeFrame extends JFrame implements ActionListener {
 			homePanel.setVisible(false);
 			registrationPanel.setVisible(true);
 		}
-		
-//		if (e.getSource().equals(register)) {
-//			JOptionPane.showMessageDialog(null, "Registered Successful!", "Registration", JOptionPane.PLAIN_MESSAGE);
-//			dispose();
-//			ServiceFrame services = new ServiceFrame("NU Bulldog Exchange Queueing Management System");
-//		}
-		
 	}
 	
 	public static void main (String[] args) {
-		HomeFrame home = new HomeFrame("NU Bulldog Exchange Queueing Management System");
-
-		
+//		HomeFrame home = new HomeFrame("NU Bulldog Exchange Queueing Management System");
 	}
 
 }
