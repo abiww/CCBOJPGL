@@ -1,21 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author Charles
- */
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.awt.event.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.awt.event.*;
 import javax.swing.*;
 
-class RegistrationPanel extends ContentPanel{
+class RegistrationPanel extends ContentPanel {
 	 private JPanel registerPanel;
 	 private ContentPanel registrationBGPanel;
 	 private JLabel registrationLabel, registrationMessageLabel;
@@ -24,9 +15,12 @@ class RegistrationPanel extends ContentPanel{
 	 private JButton register;
 	 private JLayeredPane layeredPane;
 	 private JLabel text_1, text_2, text_3, text_4, text_5;
+	 
+	  private HomeFrame homeFrame;
 
-	RegistrationPanel(int color) {
+	RegistrationPanel(int color, HomeFrame homeFrame) {
 		super(color);
+        this.homeFrame = homeFrame;
 		
 		layeredPane = new JLayeredPane();
 		layeredPane.setBounds(0, 0, 1185, 585);
@@ -227,27 +221,26 @@ class RegistrationPanel extends ContentPanel{
 		register.setBounds(125, 440, 115, 25);
 		register.setFocusable(false);
 		register.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if (e.getSource() == register) {
-                            // Validate the form fields
-                            boolean isValid = validateFields();
-                            if (isValid) {
-                                String fullName = fullnameTF.getText();
-                                String studentID = studentIDTF.getText();
-                                String department = departmentTF.getText();
-                                String email = emailTF.getText();
-                                String contactNumber = contactTF.getText();
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == register) {
+                    // Validate the form fields
+                    boolean isValid = validateFields();
+                    if (isValid) {
+                        String fullName = fullnameTF.getText();
+                        String studentID = studentIDTF.getText();
+                        String department = departmentTF.getText();
+                        String email = emailTF.getText();
+                        String contactNumber = contactTF.getText();
 
-                                JOptionPane.showMessageDialog(null, "Registered Successful!", "Registration", JOptionPane.PLAIN_MESSAGE);
-                                clearFields();
-                                ServiceFrame services = new ServiceFrame("NU Bulldog Exchange Queueiered Successful!\", \"Registration\", JOptionPane.PLAIN_MESSAGE);\n" +
-"                                clearFields();ng Management System");
-                            }
-                        }
+                        JOptionPane.showMessageDialog(null, "Registered Successful!", "Registration", JOptionPane.PLAIN_MESSAGE);
+                        clearFields();
+                        homeFrame.dispose();
+                        ServiceFrame services = new ServiceFrame("NU Bulldog Exchange Queueing Management");
                     }
-                });
-                     
+                }
+            }
+        });
 		
 		registerPanel.add(registrationLabel);
 		registerPanel.add(registrationMessageLabel);
@@ -274,64 +267,60 @@ class RegistrationPanel extends ContentPanel{
 	
 		addLP(layeredPane);
 	}
-        private boolean validateFields() {
-                String fullName = fullnameTF.getText();
-                String studentID = studentIDTF.getText();
-                String department = departmentTF.getText();
-                String email = emailTF.getText();
-                String contactNumber = contactTF.getText();
+	
+	private boolean validateFields() {
+        String fullName = fullnameTF.getText();
+        String studentID = studentIDTF.getText();
+        String department = departmentTF.getText();
+        String email = emailTF.getText();
+        String contactNumber = contactTF.getText();
 
-                // Define regex patterns for validation
-                //AYUSIN ANG PATTERNS 
-                String namePattern = "^[A-Za-z\\s]+$";
-                String studentIDPattern = "^\\d{8}$";
-                String departmentPattern = "^[A-Za-z\\s]+$";
-                String emailPattern = "^[A-Za-z0-9+_.-]+@(.+)$";
-                String contactNumberPattern = "^\\d{11}$";
+        // Define regex patterns for validation
+        String namePattern = "^[A-Za-z\\s]+$";
+        String studentIDPattern = "^\\d{8}$";
+        String departmentPattern = "^[A-Za-z\\s]+$";
+        String emailPattern = "^[A-Za-z0-9+_.-]+@(.+)$";
+        String contactNumberPattern = "^\\d{11}$";
 
-                // Validate full name
-                if (!validateField(fullName, namePattern, "Full Name")) {
-                    return false;
-                }
+        // Validate fields
+        if (!validateField(fullName, namePattern, "Full Name")) {
+            return false;
+        }
+        
+        if (!validateField(studentID, studentIDPattern, "Student ID")) {
+            return false;
+        }
+        
+        if (!validateField(department, departmentPattern, "Department")) {
+            return false;
+        }
+        
+        if (!validateField(email, emailPattern, "Email")) {
+            return false;
+        }
+        
+        if (!validateField(contactNumber, contactNumberPattern, "Contact Number")) {
+            return false;
+        }
+        return true;
+    }
 
-                // Validate student ID
-                if (!validateField(studentID, studentIDPattern, "Student ID")) {
-                    return false;
-                }
-
-                // Validate department
-                if (!validateField(department, departmentPattern, "Department")) {
-                    return false;
-                }
-
-                // Validate email
-                if (!validateField(email, emailPattern, "Email")) {
-                    return false;
-                }
-
-                // Validate contact number
-                if (!validateField(contactNumber, contactNumberPattern, "Contact Number")) {
-                    return false;
-                }
-
-                return true;
-            }
-
-            private boolean validateField(String fieldValue, String pattern, String fieldName) {
-                Pattern regexPattern = Pattern.compile(pattern);
-                Matcher matcher = regexPattern.matcher(fieldValue);
-                boolean isValid = matcher.matches();
-                if (!isValid) {
-                    JOptionPane.showMessageDialog(null, "Invalid " + fieldName, "Validation Error", JOptionPane.ERROR_MESSAGE);
-                }
-                return isValid;
-            }
-            
-            void clearFields() {
-                fullnameTF.setText("");
-                studentIDTF.setText("");
-                departmentTF.setText("");
-                emailTF.setText("");
-                contactTF.setText("");
-            }
+    private boolean validateField(String fieldValue, String pattern, String fieldName) {
+        Pattern regexPattern = Pattern.compile(pattern);
+        Matcher matcher = regexPattern.matcher(fieldValue);
+        boolean isValid = matcher.matches();
+        if (!isValid) {
+            JOptionPane.showMessageDialog(null, "Invalid " + fieldName, "Validation Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return isValid;
+    }
+    
+    void clearFields() {
+        fullnameTF.setText("");
+        studentIDTF.setText("");
+        departmentTF.setText("");
+        emailTF.setText("");
+        contactTF.setText("");
+    }
+    
 }
