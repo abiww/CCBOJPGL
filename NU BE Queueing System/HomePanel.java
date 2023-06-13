@@ -1,4 +1,3 @@
-
 class HomePanel extends ContentPanel {
 
 	HomePanel(int color) {
