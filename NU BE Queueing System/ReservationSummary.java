@@ -2,14 +2,18 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.imageio.*;
 import javax.swing.*;
+
+import nube.model.UserManagement;
+
 import java.io.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.awt.image.*;
 
 public class ReservationSummaryFrame extends JFrame{
     private JLabel purposeLabel, dateLabel, timeLabel;
-    private JLabel purpose, date, time;
-    private JLabel headings, noteLabel_1, noteLabel_2;
-    private JLabel logoLabel;
+    private JLabel logoLabel, headings, userInfo, reservationInfo, noteLabel_1, noteLabel_2;
+    private JLabel nameLabel, studentIDLabel, departmentLabel, yearLabel, currentDate;
     private JPanel topPanel, summaryPanel;
     private ImageIcon logo;
 	private Image image, resizedImage;
@@ -41,6 +45,13 @@ public class ReservationSummaryFrame extends JFrame{
 		summaryPanel.setLayout(null);
 		summaryPanel.setBounds(20, 80, 300, 425);
 		
+		UserManagement users = new UserManagement("", "", "", "", "", 0, "");
+		
+		String studentId = users.getStudentID();
+		String name = users.getName();
+		String dept = users.getDepartment();
+		int year = users.getYear();
+		
 		headings = new JLabel("OFFICIAL SLOT RESERVATION");
 		headings.setHorizontalAlignment(JLabel.CENTER);
 		headings.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -57,37 +68,60 @@ public class ReservationSummaryFrame extends JFrame{
 		noteLabel_2.setFont(new Font("Tahoma", Font.BOLD, 10));
 		noteLabel_2.setBounds(20, 380, 265, 35);
 		
-		purposeLabel = new JLabel("PURPOSE:");
-		purposeLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		LocalDate current_Date = LocalDate.now();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM-dd-yyyy");
+		String formattedDate = current_Date.format(formatter);
+		
+		currentDate = new JLabel("DATE: " + formattedDate);
+		currentDate.setFont(new Font("Tahoma", Font.BOLD, 13));
+		currentDate.setForeground(Color.BLACK);
+		currentDate.setBounds(165, 80, 120, 15);
+		
+		userInfo = new JLabel("PERSONAL INFORMATION");
+		userInfo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		userInfo.setForeground(new Color(0x293476));
+		userInfo.setBounds(15, 100, 230, 20);
+		
+		studentIDLabel = new JLabel("STUDENT ID: " + studentId);
+		studentIDLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		studentIDLabel.setForeground(Color.BLACK);
+		studentIDLabel.setBounds(15, 125, 300, 15);
+		
+		nameLabel = new JLabel("NAME: " + name);
+		nameLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		nameLabel.setForeground(Color.BLACK);
+		nameLabel.setBounds(15, 150, 300, 15);
+		
+		departmentLabel = new JLabel("DEPARTMENT: " + dept);
+		departmentLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		departmentLabel.setForeground(Color.BLACK);
+		departmentLabel.setBounds(15, 175, 300, 15);
+		
+		yearLabel = new JLabel("YEAR: " + year);
+		yearLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		yearLabel.setForeground(Color.BLACK);
+		yearLabel.setBounds(15, 200, 300, 15);
+		
+		reservationInfo = new JLabel("RESERVATION SUMMARY");
+		reservationInfo.setFont(new Font("Tahoma", Font.BOLD, 15));
+		reservationInfo.setForeground(new Color(0x293476));
+		reservationInfo.setBounds(15, 225, 230, 20);
+		
+		purposeLabel = new JLabel("PURPOSE: " + purpose_);
+		purposeLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		purposeLabel.setForeground(Color.BLACK);
 		purposeLabel.setFocusable(false);
-		purposeLabel.setBounds(15, 90, 100, 20);
+		purposeLabel.setBounds(15, 250, 300, 20);
 		
-		purpose = new JLabel(purpose_);
-		purpose.setFont(new Font("Tahoma", Font.BOLD, 15));
-		purpose.setForeground(Color.BLACK);
-		purpose.setFocusable(false);
-		purpose.setBounds(100, 90, 100, 20);
-		
-		dateLabel = new JLabel("DATE:");
-		dateLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		dateLabel = new JLabel("SCHEDULED DATE: " + date_);
+		dateLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		dateLabel.setForeground(Color.BLACK);
-		dateLabel.setBounds(15, 120, 200, 20);
+		dateLabel.setBounds(15, 275, 300, 20);
 		
-		date = new JLabel(date_);
-		date.setFont(new Font("Tahoma", Font.BOLD, 15));
-		date.setForeground(Color.BLACK);
-		date.setBounds(70, 120, 200, 20);
-		
-		timeLabel = new JLabel("TIME:");
-		timeLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		timeLabel = new JLabel("SCHEDULED TIME: " + time_);
+		timeLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		timeLabel.setForeground(Color.BLACK);
-		timeLabel.setBounds(15, 150, 200, 20);
-		
-		time = new JLabel(time_);
-		time.setFont(new Font("Tahoma", Font.BOLD, 15));
-		time.setForeground(Color.BLACK);
-		time.setBounds(70, 150, 200, 20);
+		timeLabel.setBounds(15, 300, 300, 20);
 
         save = new JButton("SAVE");
 		save.setHorizontalAlignment(SwingConstants.CENTER);
@@ -99,7 +133,7 @@ public class ReservationSummaryFrame extends JFrame{
 		save.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    saveComponentAsImage(summaryPanel, "image.png", "PNG");
+                    saveComponentAsImage(summaryPanel, "Reservation_Image.png", "PNG");
                     JOptionPane.showMessageDialog(null, "Image saved successfully!");
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -114,9 +148,13 @@ public class ReservationSummaryFrame extends JFrame{
         summaryPanel.add(purposeLabel);
         summaryPanel.add(dateLabel);
         summaryPanel.add(timeLabel);
-        summaryPanel.add(purpose);
-        summaryPanel.add(date);
-        summaryPanel.add(time);
+        summaryPanel.add(userInfo);
+        summaryPanel.add(studentIDLabel);
+        summaryPanel.add(nameLabel);
+        summaryPanel.add(departmentLabel);
+        summaryPanel.add(yearLabel);
+        summaryPanel.add(currentDate);
+        summaryPanel.add(reservationInfo);
         
         add(summaryPanel);
         add(save);
