@@ -12,7 +12,6 @@ public class ReservationPanel extends ContentPanel implements ActionListener{
     private JTextField yearTF;
     private JButton next, previous,confirm;
     private JRadioButton time_1, time_2, time_3, time_4, time_5;
-    private ButtonGroup timeOptions;
     private ReservationSummaryFrame reservationSummary;
     int i;
     
@@ -38,7 +37,6 @@ public class ReservationPanel extends ContentPanel implements ActionListener{
 		purposeLabel = new JLabel("PURPOSE:");
 		purposeLabel.setFont(new Font("Tahoma", Font.BOLD, 18));
 		purposeLabel.setForeground(Color.BLACK);
-		purposeLabel.setFocusable(false);
 		purposeLabel.setBounds(30, 170, 100, 20);
 						
 		String purposes[] = {"Buy Items", "Return Items"};
@@ -170,7 +168,32 @@ public class ReservationPanel extends ContentPanel implements ActionListener{
 		confirm.setForeground(Color.WHITE);
 		confirm.setBounds(120, 490, 115, 25);
 		confirm.setFocusable(false);
-		confirm.addActionListener(this);
+		confirm.addActionListener(new ActionListener() {
+			@Override
+            public void actionPerformed(ActionEvent e) {
+				boolean reservationConfirmed = false;
+				if (e.getSource().equals(confirm)) {
+					if (!time_1.isSelected() && !time_2.isSelected() && !time_3.isSelected() && !time_4.isSelected() && !time_5.isSelected()) {
+						JOptionPane.showMessageDialog(null, "You need to select one time option!", "Error", JOptionPane.ERROR_MESSAGE);
+					}  else {
+						int confirmation = JOptionPane.showConfirmDialog(null, "Do you want to confirm your reservation?", "Reservation Confirmation", JOptionPane.YES_NO_OPTION);
+						if (confirmation == JOptionPane.YES_OPTION) {
+							JOptionPane.showMessageDialog(null, "Reservation confirmed!");
+							reservationConfirmed = true;
+							String purpose = getPurpose();
+							String date = getDate();
+							String time = getTime();
+							
+							reservationSummary = new ReservationSummaryFrame(purpose, date, time);
+							reservationSummary.setVisible(true);
+						
+						} else {
+							reservationConfirmed = false;
+						}
+					}
+				}
+			}
+        });
 
         slotReservationPanel.add(confirm);
 		slotReservationPanel.add(pmLabel);
@@ -228,7 +251,23 @@ public class ReservationPanel extends ContentPanel implements ActionListener{
 		previous.setForeground(Color.WHITE);
 		previous.setBounds(18, 510, 115, 25);
 		previous.setFocusable(false);
-		previous.addActionListener(this);
+		previous.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	if(e.getSource() == previous)
+        	    {
+        	        if(i==0)
+        	        {
+        	        	
+        	        }
+        	        else
+        	            {
+        	            i=i-1;
+        	            calendarLabel.setIcon(calendar[i]);
+        	        }
+        	    }
+            }
+        });
 			
 		next = new JButton("NEXT");
 		next.setHorizontalAlignment(SwingConstants.CENTER);
@@ -237,7 +276,20 @@ public class ReservationPanel extends ContentPanel implements ActionListener{
 		next.setForeground(Color.WHITE);
 		next.setBounds(143, 510, 115, 25);
 		next.setFocusable(false);
-		next.addActionListener(this);
+		next.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+        		if(e.getSource() == next) {
+        			if(i==calendar.length-1) {
+        	        	
+        	        } 
+        			else {
+        				i=i+1;
+        	            calendarLabel.setIcon(calendar[i]);
+        	        }
+        		}
+            }
+        });
       
         addLabel(calendarLabel);
         addButton(next);
@@ -282,61 +334,9 @@ public class ReservationPanel extends ContentPanel implements ActionListener{
     	return timeStr;
     }
 
-    private boolean reservationConfirmed = false; // Flag to track reservation confirmation
-    
-    @Override
-    public void actionPerformed(ActionEvent e) {
-    	
-    	if(e.getSource() == previous)
-	    {
-	        if(i==0)
-	        {
-	        	
-	        }
-	        else
-	            {
-	            i=i-1;
-	            calendarLabel.setIcon(calendar[i]);
-	        }
-	    }
-	    
-		if(e.getSource() == next)
-	    {
-	        if(i==calendar.length-1)
-	        {
-	        	
-	        }
-	        else
-	            {
-	            i=i+1;
-	            calendarLabel.setIcon(calendar[i]);
-	            }
-	        }
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
-	    
-	    if (e.getSource().equals(confirm)) {
-	    	
-	    	if (e.getSource() == confirm) {
-	            if (!time_1.isSelected() && !time_2.isSelected() && !time_3.isSelected() && !time_4.isSelected() && !time_5.isSelected()) {
-	                JOptionPane.showMessageDialog(null, "You need to select one time option!", "Error", JOptionPane.ERROR_MESSAGE);
-	            }  else {
-	            	int confirmation = JOptionPane.showConfirmDialog(null, "Do you want to confirm your reservation?", "Reservation Confirmation", JOptionPane.YES_NO_OPTION);
-			        if (confirmation == JOptionPane.YES_OPTION) {
-			            JOptionPane.showMessageDialog(null, "Reservation confirmed!");
-			            reservationConfirmed = true;
-			            
-			            String purpose = getPurpose();
-			        	String date = getDate();
-			        	String time = getTime();
-			        	
-			        	reservationSummary = new ReservationSummaryFrame(purpose, date, time);
-			            reservationSummary.setVisible(true);
-			            
-			        } else {
-			            reservationConfirmed = false;
-			        }
-	            }
-	    	}
-	    }
-    }
+	}
 }
