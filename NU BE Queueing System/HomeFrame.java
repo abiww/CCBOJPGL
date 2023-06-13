@@ -137,9 +137,4 @@ public class HomeFrame extends JFrame implements ActionListener {
 			registrationPanel.setVisible(true);
 		}
 	}
-	
-	public static void main (String[] args) {
-//		HomeFrame home = new HomeFrame("NU Bulldog Exchange Queueing Management System");
-	}
-
 }
