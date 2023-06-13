@@ -1,5 +1,4 @@
 import java.awt.*;
-
 import javax.swing.*;
 
 class ContentPanel {
@@ -8,7 +7,7 @@ class ContentPanel {
 	ContentPanel (int color) {
 		panel = new JPanel();
 		panel.setBackground(new Color(color));
-		panel.setBounds(0, 0, 1185,630);
+		panel.setBounds(0, 0, 1185, 585);
 		panel.setLayout(null);
 	}
 
@@ -47,7 +46,7 @@ class ContentPanel {
 		picture = new ImageIcon(resizedImage);
 		 
 		JLabel label = new JLabel();
-		label.setBounds(180, 15, 900, 600);;
+		label.setBounds(0, 0, 1185, 585);
 		label.setIcon(picture);
 		
 		panel.add(label);
