@@ -10,7 +10,8 @@ import portfolio.abigail.*;
 import portfolio.charles.*;
 import portfolio.kat.*;
 
-public class PortfolioIntegration extends JFrame {
+public class PortfolioIntegration extends RoundedButton {
+	private JFrame frame;
 	private JPanel topPanel, middlePanel, abiPanel, charlesPanel, katPanel;
 	private RoundedButton viewAbi, viewCharles, viewKat, requestAbi, requestCharles, requestKat;
 	private JLabel logoLabel, friendReqLabel, seeAllLabel, abiLabel, charlesLabel, katLabel;
@@ -18,11 +19,12 @@ public class PortfolioIntegration extends JFrame {
 	private Image image, resizedImage;
 	private JToggleButton switchMode;
 	
-	PortfolioIntegration() {
-		setTitle("Portfolio Integration");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(new Dimension(640, 410));
-		setLayout(new BorderLayout());
+	PortfolioIntegration(String text) {
+		super(text);
+		frame = new JFrame("Portfolio Integration");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(new Dimension(640, 410));
+		frame.setLayout(new BorderLayout());
 		
 		topPanel = new JPanel();
 		topPanel.setPreferredSize(new Dimension(0, 60));
@@ -235,8 +237,8 @@ public class PortfolioIntegration extends JFrame {
 		middlePanel.add(charlesPanel);
 		middlePanel.add(katPanel);
 		
-		add(topPanel, BorderLayout.NORTH);
-		add(middlePanel, BorderLayout.CENTER);
+		frame.add(topPanel, BorderLayout.NORTH);
+		frame.add(middlePanel, BorderLayout.CENTER);
 	}
 	
 	void lightMode() {
@@ -282,51 +284,8 @@ public class PortfolioIntegration extends JFrame {
 		viewKat.setBackground(new Color(0x737373));
 		viewKat.setForeground(Color.WHITE);
 	}
-	
-	 private static class RoundedButton extends JButton {
 
-	        public RoundedButton(String text) {
-	            super(text);
-	            setHorizontalAlignment(SwingConstants.CENTER);
-	    		setFont(new Font(null, Font.BOLD, 15));
-	    		setForeground(Color.WHITE);
-	            setOpaque(false);
-	            setBorderPainted(false);
-	        }
-
-	        @Override
-	        protected void paintComponent(Graphics g) {
-	            Graphics2D graphics2D = (Graphics2D) g.create();
-	            graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
-	            int width = getWidth();
-	            int height = getHeight();
-
-	            // Paint the button background
-	            if (getModel().isPressed()) {
-	                graphics2D.setColor(getBackground().darker());
-	            } else {
-	                graphics2D.setColor(getBackground());
-	            }
-
-	            graphics2D.fill(new RoundRectangle2D.Double(0, 0, width - 1, height - 1, 10, 10));
-
-	            // Paint the button text
-	            graphics2D.setColor(getForeground());
-	            FontMetrics fontMetrics = graphics2D.getFontMetrics();
-	            String text = getText();
-	            int textWidth = fontMetrics.stringWidth(text);
-	            int textHeight = fontMetrics.getHeight();
-	            int x = (width - textWidth) / 2;
-	            int y = (height + textHeight) / 2 - fontMetrics.getDescent();
-	            graphics2D.drawString(text, x, y);
-
-	            graphics2D.dispose();
-	        }
-	    }
-	 
 	 public void portfolioIntegrationRun() {
-		 PortfolioIntegration portfolios = new PortfolioIntegration();
-		 portfolios.setVisible(true);
+		 frame.setVisible(true);
 	 }
 }
