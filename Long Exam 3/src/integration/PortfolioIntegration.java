@@ -25,7 +25,10 @@ public class PortfolioIntegration extends RoundedButton {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(new Dimension(640, 410));
 		frame.setLayout(new BorderLayout());
-		
+		design();	
+	}
+	
+	void design() {
 		topPanel = new JPanel();
 		topPanel.setPreferredSize(new Dimension(0, 60));
 		topPanel.setBackground(new Color(0x242526));
