@@ -112,7 +112,9 @@ public class PortfolioIntegration extends RoundedButton {
 					requestAbi.setText("Request Accepted");
 					requestAbi.setBackground(new Color(0xA6A6A6));
 					requestAbi.setEnabled(false);
-		        } 
+					
+					viewAbi.setEnabled(true);		        
+				} 
 			}
 		});
 		
@@ -120,6 +122,7 @@ public class PortfolioIntegration extends RoundedButton {
 		viewAbi.setBackground(new Color(0x737373));
 		viewAbi.setFocusable(false);
 		viewAbi.setBounds(10, 210, 160, 30);
+		viewAbi.setEnabled(false);
 		viewAbi.addActionListener(new ActionListener() {
 			@Override
             public void actionPerformed(ActionEvent e) {
@@ -162,6 +165,8 @@ public class PortfolioIntegration extends RoundedButton {
 					requestCharles.setText("Request Accepted");
 					requestCharles.setBackground(new Color(0xA6A6A6));
 					requestCharles.setEnabled(false);
+					
+					viewCharles.setEnabled(true);
 		        } 
 			}
 		});
@@ -170,6 +175,7 @@ public class PortfolioIntegration extends RoundedButton {
 		viewCharles.setBackground(new Color(0x737373));
 		viewCharles.setFocusable(false);
 		viewCharles.setBounds(10, 210, 160, 30);
+		viewCharles.setEnabled(false);
 		viewCharles.addActionListener(new ActionListener() {
 			@Override
             public void actionPerformed(ActionEvent e) {
@@ -212,6 +218,7 @@ public class PortfolioIntegration extends RoundedButton {
 					requestKat.setText("Request Accepted");
 					requestKat.setBackground(new Color(0xA6A6A6));
 					requestKat.setEnabled(false);
+					viewKat.setEnabled(true);
 		        } 
 			}
 		});
@@ -220,6 +227,7 @@ public class PortfolioIntegration extends RoundedButton {
 		viewKat.setBackground(new Color(0x737373));
 		viewKat.setFocusable(false);
 		viewKat.setBounds(10, 210, 160, 30);
+		viewKat.setEnabled(false);
 		viewKat.addActionListener(new ActionListener() {
 			@Override
             public void actionPerformed(ActionEvent e) {
